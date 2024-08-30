@@ -1,0 +1,39 @@
+To install Jenkins on an Amazon AMI, follow these steps:
+
+1. Launch an EC2 Instance:
+Go to the AWS Management Console and select EC2.
+Choose "Launch Instance".
+Select an appropriate AMI (e.g., Ubuntu Server 22.04 LTS).
+Configure instance details (e.g., instance type, key pair, security group).
+Review and launch the instance.
+
+2. Connect to the Instance:
+Use SSH to connect to your instance using the key pair you specified.
+
+3. Install Java:
+Jenkins requires Java to run. Use the package manager (apt or yum) to install Java 8 or later:
+sudo yum install java-11*
+
+4. Set Java Home
+[root@ip-172-31-85-8 ~]# find / -name java-11* | head -n 4
+/etc/alternatives/java-11-amazon-corretto
+/usr/lib/jvm/java-11-amazon-corretto.x86_64  --- ** Focus on this **
+
+In .bash_profile add this 
+JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto.x86_64
+export JAVA_HOME
+PATH=$PATH:$HOME/bin:$JAVA_HOME
+
+Then execute . ./.bas_profile
+
+5. Install Jenkins
+# https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum upgrade
+sudo yum install jenkins
+
+Start the Jenkins Service
+sudo service jenkins start
+
