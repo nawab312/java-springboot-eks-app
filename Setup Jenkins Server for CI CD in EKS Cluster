@@ -24,7 +24,7 @@ JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto.x86_64
 export JAVA_HOME
 PATH=$PATH:$HOME/bin:$JAVA_HOME
 
-Then execute . ./.bas_profile
+Then execute . ./.bash_profile
 
 5. Install Jenkins
 # https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
@@ -37,8 +37,52 @@ sudo yum install jenkins
 Start the Jenkins Service
 sudo service jenkins start
 
+To access your Jenkins instance from outside your EC2 instance, you need to add port 8080 to the inbound rules of your security group.
+
+user: admin
+password: admin123
+
 
 *** Update AWS CLI in Jenkins Server ***
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+
+6. Install and Configure Maven and Git
+Change to root user
+cd /opt
+wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz ###You can get the link from https://maven.apache.org/download.cgi
+tar -xzvf apache-maven-3.9.9-bin.tar.gz
+
+In .bash_profile add this 
+M2_HOME=/opt/apache-maven-3.9.9
+M2=/opt/apache-maven-3.9.9/bin
+export M2_HOME
+export M2
+And update PATH
+PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2
+
+yum install git
+
+Finally we will assign shell to Jenkins user
+vi /etc/passwd
+jenkins:x:992:992:Jenkins Automation Server:/var/lib/jenkins:/bin/false ---> jenkins:x:992:992:Jenkins Automation Server:/var/lib/jenkins:/bin/bash
+
+7. Docker Setup in Jenkins Server
+yum install docker -y
+systemctl start docker
+To enable docker service to start at boot time: chkconfig docker on
+
+Provide permissions to Jenkins user in Jenkins server to access Docker
+groupadd docker
+usermod -aG docker jenkins
+Change the permissions of the Docker socket file to allow all users to read, write, and execute it
+chmod 777 /var/run/docker.sock
+
+Add Jenkins user in sudoers file to get sudo access
+vi /etc/sudoers
+jenkins ALL=(ALL) NOPASSWD: ALL
+
+8. Install and Configure Docker & Maven Plugins in Jenkins Server
+
+
