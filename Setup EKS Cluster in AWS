@@ -29,3 +29,10 @@ VPCs and subnets: To communicate with the Kubernetes nodes and other resources w
 S3 buckets: To store cluster configuration data and logs.
 CloudWatch: To monitor the health and performance of the cluster.
 
+***********************************************************************************************************************************************
+3. Setup EKS Kubernetes Service in AWS
+eksctl create cluster –name myCluster –region us-east-1 –node-type t2.micro
+Update the Kubernetes configuration file (~/.kube/config) with the necessary credentials and endpoint information to connect to a specific EKS cluster.
+aws eks update-kubeconfig --region us-east-1 --name myCluster
+
+
