@@ -7,6 +7,12 @@ So instead of that, if we use helm, then we can package all together and we can 
 
 ******************************************************************************************************************************************************************
 2. Helm Architecture
-So let's see how helm three will work with the Kubernetes. We are going to install Helm inside the Jenkins server. Why? Because what Jenkins will do in the job whenever the code is ready, it will pull the code from the GitHub repository. With the help of Maven it will build the code and it will create a Docker image and the Docker image will be stored inside the Docker registry. Once it is done, the job will be completed and whenever we want to deploy it to the Kubernetes cluster, then it should configure it as a CD job. So whenever we want to deploy from Jenkins to Kubernetes cluster, we use Helm to deploy the applications.
+So let's see how helm three will work with the Kubernetes. We are going to install Helm inside the Jenkins server. 
+Why? Because what Jenkins will do in the job whenever the code is ready, it will pull the code from the GitHub repository. 
+With the help of Maven it will build the code and it will create a Docker image and the Docker image will be stored inside the Docker registry. 
+Once it is done, the job will be completed and whenever we want to deploy it to the Kubernetes cluster, then it should configure it as a CD job. 
+So whenever we want to deploy from Jenkins to Kubernetes cluster, we use Helm to deploy the applications.
 So that's the reason we configure helm inside the Jenkins and in the CD job, it is going to execute
 
+******************************************************************************************************************************************************************
+3. Install and Configure Helm in Jenkins Server
