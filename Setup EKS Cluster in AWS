@@ -35,4 +35,7 @@ eksctl create cluster –name myCluster –region us-east-1 –node-type t2.micr
 Update the Kubernetes configuration file (~/.kube/config) with the necessary credentials and endpoint information to connect to a specific EKS cluster.
 aws eks update-kubeconfig --region us-east-1 --name myCluster
 
+***********************************************************************************************************************************************
+4. Create Docker Account in DockerHUB
+
 
