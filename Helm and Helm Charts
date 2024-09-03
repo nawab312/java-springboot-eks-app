@@ -1,0 +1,8 @@
+1. What is Helm
+Helm is a tool for Kubernetes that helps you install and manage applications, which means like in RedHat and Ubuntu operating systems we see Yum and apt package manager to install any software or to delete or to manage software inside the operating system. Same way. Helm is also specially designed for the Kubernetes cluster or Kubernetes infrastructure.
+What are the advantages of Helm?
+Basically we use helm for the repetitive tasks and we can do application deployment easy standardized and it can be reusable, which means let's take an example.
+For example, if we want to deploy an application, we need many components like pods, secrets, jobs, volumes. Config maps cetera. So if you don't have helm then we need to create each individual yaml file for each resource and we need to execute them with the help of kubectl command. And managing these resources with the kubectl will be tough.
+So instead of that, if we use helm, then we can package all together and we can create it as a helm chart so that the deployment will be very easy and we can maintain the versions of the charts and many things we can do.
+
+******************************************************************************************************************************************************************
