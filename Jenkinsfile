@@ -1,9 +1,8 @@
 pipeline {
-    agent any {
-        tools {
-            maven 'maven3'
-            jdk 'jdk8'
-        }
+    agent any
+    tools {
+        maven 'maven3'
+        jdk 'JDK8'
     }
     stages {
         stage('Build Maven') {
@@ -18,9 +17,9 @@ pipeline {
                 sh 'cp -r target/*.jar docker'
             }
         }
-        stage('Build Docker image') {
+        stage('Build Docker Image') {
             steps {
-                script {
+                script{
                     def customImage = docker.build('initsixcloud/petclinic', "./docker")
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub')
                     {
